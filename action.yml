@@ -41,10 +41,6 @@ runs:
         shell: cmd
         run: dotnet appcat analyze ${{ inputs.path }} --non-interactive --code --binaries --privacyMode ${{ inputs.privacyMode }} --serializer ${{ inputs.serializer }} --target ${{ inputs.target }} --report ./appcat-report
 
-      # - name: Compress report
-      #   shell: cmd
-      #   run: 7z a appcat-report.zip appcat-report
-
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
