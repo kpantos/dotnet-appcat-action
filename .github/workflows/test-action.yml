@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: foo
-        uses: kpantos/appcat-action@v2
+        uses: kpantos/appcat-action@v3
         with:
           source: 'Solution'
           path: 'test/src/src.csproj'
