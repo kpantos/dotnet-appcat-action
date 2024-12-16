@@ -39,6 +39,8 @@ runs:
 
       - name: Run Microsoft Application Code Assesment Tool
         shell: cmd
+        env:
+          DOTNET_APPCAT_SKIP_FIRST_TIME_EXPERIENCE: true
         run: appcat analyze ${{ inputs.path }} --non-interactive --code --binaries --privacyMode ${{ inputs.privacyMode }} --serializer ${{ inputs.serializer }} --target ${{ inputs.target }} --report ./appcat-report
 
       - name: Upload report
