@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch:
+  push:
+  
+jobs:
+  test_appcat_action:
+    runs-on: windows-latest
+    name: A job to test the appcat action
+    steps:
+      - uses: actions/checkout@v4
+      - id: foo
+        uses: kpantos/appcat-action@SHA
+        with:
+          source: 'Solution'
+          path: 'test/src/src.csproj'
+          target: 'aks.linux'
+          privacyMode: 'Unrestricted'
+          serializer: 'html'
+
