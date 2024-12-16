@@ -1,0 +1,47 @@
+name: 'Microsoft Application Code Assesment Tool'
+description: 'Provide a composite pipeline to run Microsoft application code assesment tool against a repository'
+
+branding:
+  icon: 'arrow-right-circle'
+  color: 'gray-dark'
+
+inputs:
+  source:
+    description: 'Source which the tool should analyze (Solution or Folder)'
+    required: true
+  path:
+    description: 'specify either the application (.sln) or the folder path to be analyzed'
+    required: true
+  target:
+    description: 'Target toward which the tool should analyze the application'
+    required: true
+  privacyMode:
+    description: 'Privacy mode specifying how much data is included in generated report files (Unrestricted, Protected, Restricted)'
+    required: false
+    default: 'Unrestricted'
+  serializer:
+    description: 'Specifies the format for the report to be used after analysis is complete (HTML, CSV, JSON, etc)'
+    required: false
+    default: 'html'
+
+runs:
+    using: 'composite'
+    steps:
+      - name: Check Runner OS
+        if: ${{ runner.os }} == 'Linux'
+        shell: cmd
+        run:  echo "::error title=⛔ error hint::Support Linux Only"
+              exit 1
+           
+      - name: Install Microsoft Application Code Assesment Tool
+        shell: cmd
+        run: dotnet tool install dotnet-appcat --global
+
+      - name: Run Microsoft Application Code Assesment Tool
+        shell: cmd
+        run: dotnet appcat analyze ${{ inputs.path }} --non-interactive --code --binaries --privacyMode ${{ inputs.privacyMode }} --serializer ${{ inputs.serializer }} --target ${{ inputs.target }}
+
+      - name: Upload report
+        uses: actions/upload-artifact@v2
+        with:
+          name: appcat-report
