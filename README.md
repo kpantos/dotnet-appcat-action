@@ -4,8 +4,6 @@
 
 This action uses the [Azure Migrate application and code assessment for .NET](https://learn.microsoft.com/en-us/azure/migrate/appcat/dotnet) CLI tool to assess .Net applications and upload the assesment report into your repository.
 
-GitHub has data that is not represented in git — like Issues and PRs. The purpose of this action is to capture that data in a portable, usable fashion.
-
 ### Prerequisites
 - The action requires a Windows based runner. Find out more on [Standard GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories)
 
